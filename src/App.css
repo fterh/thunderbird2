@@ -70,6 +70,21 @@ body {
   text-align: center;
   border-bottom: 6px solid #e54142; }
 
+#loader {
+  color: #f8a3a5;
+  text-align: center;
+  margin-top: 40px; }
+  #loader span {
+    display: block;
+    margin-bottom: 20px; }
+  #loader #loader-loading {
+    font-size: 1.8em;
+    font-weight: 800; }
+  #loader #loader-status {
+    font-size: 1.5em;
+    padding: 5px;
+    background: #e54142; }
+
 #data-wrapper {
   display: -webkit-box;
   display: -webkit-flex;
@@ -128,7 +143,7 @@ body {
       text-align: left;
       font-size: 2em;
       text-transform: uppercase;
-      padding: 0 5px;
+      padding: 5px;
       background: #e54142; }
     #data-wrapper .right .subdata-2 {
       margin-top: 0px;
