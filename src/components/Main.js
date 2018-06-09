@@ -1,5 +1,5 @@
 import React from "react";
-import DataWrapper from './DataWrapper';
+import DataWrapperContainer from './../containers/DataWrapperContainer';
 
 const Main = () => {
   return (
@@ -7,7 +7,7 @@ const Main = () => {
       <h1 id="title" className="heading">
         What's the weather here?
       </h1>
-        <DataWrapper />
+        <DataWrapperContainer />
     </main>
   );
 };

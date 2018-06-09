@@ -14,7 +14,8 @@ $primaryColorDarker: #e54142;
 
 // Positioning
 $dataWrapperMarginTop: 40px;
-$nowcastPadding: 0 5px;
+$loaderStatusPadding: 5px;
+$nowcastPadding: 5px;
 
 /* Rules */
 // Generics
@@ -95,6 +96,28 @@ body {
   font-size: 36px;
   text-align: center;
   border-bottom: 6px solid $primaryColorDarker;
+}
+
+#loader {
+  color: $primaryColorLighter;
+  text-align: center;
+  margin-top: $dataWrapperMarginTop;
+
+  span {
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  #loader-loading {
+    font-size: 1.8em;
+    font-weight: 800;
+  }
+
+  #loader-status {
+    font-size: 1.5em;
+    padding: $loaderStatusPadding;
+    background: $primaryColorDarker;
+  }
 }
 
 #data-wrapper {
