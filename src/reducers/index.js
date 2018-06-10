@@ -9,6 +9,7 @@ import {
   UPDATE_LOADER_LOADED,
   UPDATE_LOADER_STATUS
 } from './../actions/loader';
+import { UPDATE_LOCATION } from './../actions/location';
 
 const temperature = (state, action) => {
   return action.type === UPDATE_TEMPERATURE ? action.temperature : '-';
@@ -30,7 +31,7 @@ const loader = (state, action) => {
   switch (action.type) {
     case UPDATE_LOADER_LOADED:
       return Object.assign({}, state, {
-        isLoaded: action.isLoaded
+        loaded: action.loaded
       });
       break;
     
@@ -42,10 +43,15 @@ const loader = (state, action) => {
   
     default:
       return {
-        isLoaded: false,
-        status: 'Starting the engines...'
+        loaded: false,
+        status: 'Starting the engines...',
+        error: false
       };
   }
+};
+
+const location = (state, action) => {
+  return action.type === UPDATE_LOCATION ? action.position : null;
 };
 
 export default combineReducers({
@@ -53,5 +59,6 @@ export default combineReducers({
   nowcast,
   humidity,
   uvIndex,
-  loader
+  loader,
+  location
 });

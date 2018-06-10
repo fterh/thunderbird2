@@ -12,6 +12,8 @@ $primaryColorLighter: #f8a3a5;
 $primaryColorLighter2: #ffd3d9;
 $primaryColorDarker: #e54142;
 
+$error: #B00020;
+
 // Positioning
 $dataWrapperMarginTop: 40px;
 $loaderStatusPadding: 5px;
@@ -19,6 +21,12 @@ $nowcastPadding: 5px;
 
 /* Rules */
 // Generics
+.error {
+  color: $error;
+  font-weight: 800;
+  background: $primaryColorLighter2;
+}
+
 a {
   color: $primaryColorLighter;
 
