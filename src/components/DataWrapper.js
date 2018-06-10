@@ -7,10 +7,15 @@ class DataWrapper extends Component {
   constructor(props) {
     super(props);
 
-    this.props.updateLoaderStatus('Getting your location...');
+    this.props.updateLoaderStatus('Getting your location');
     location().then((position) => {
       this.props.updateLocation(position);
+      this.props.updateLoaderStatus('Located');
+    }).catch((e) => {
+      this.props.updateLoaderStatus('Unable to get your location');
+      this.props.updateLoaderError(true);
     });
+
     // Make API requests
     // Receive API responses
     // Match location to most proximate data
@@ -29,7 +34,7 @@ class DataWrapper extends Component {
             <h3 id="nowcast" className="subdata-1">
               Sunny
             </h3>
-            {/* <DataItemContainer id="nowcast" className="subdata-1" /> */}
+            {/* <DataItemContainer id="nowcast" className="subdata-1 highlight" /> */}
             <h3 id="humidity" className="subdata-2">
               Humidity: 65%
             </h3>
@@ -47,7 +52,7 @@ class DataWrapper extends Component {
           <span id="loader-loading">Loading:</span>
           <StatusItem
             id="loader-status"
-            className={ this.props.loader.error ? 'error' : undefined }
+            className={ this.props.loader.error ? 'error' : 'highlight' }
           >
             { this.props.loader.status }
           </StatusItem>

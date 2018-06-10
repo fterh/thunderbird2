@@ -16,15 +16,24 @@ $error: #B00020;
 
 // Positioning
 $dataWrapperMarginTop: 40px;
-$loaderStatusPadding: 5px;
-$nowcastPadding: 5px;
+$highlightPadding: 5px;
 
 /* Rules */
 // Generics
 .error {
   color: $error;
   font-weight: 800;
+  padding: $highlightPadding;
   background: $primaryColorLighter2;
+
+  &::before {
+    content: "Error: ";
+  }
+}
+
+.highlight {
+  padding: $highlightPadding;
+  background: $primaryColorDarker;
 }
 
 a {
@@ -123,8 +132,6 @@ body {
 
   #loader-status {
     font-size: 1.5em;
-    padding: $loaderStatusPadding;
-    background: $primaryColorDarker;
   }
 }
 
@@ -192,8 +199,6 @@ body {
       text-align: left;
       font-size: 2em;
       text-transform: uppercase;
-      padding: $nowcastPadding;
-      background: $primaryColorDarker;
     }
     
     .subdata-2 {
