@@ -1,6 +1,18 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed");
 /* Sass variables */
 /* Rules */
+.error {
+  color: #B00020;
+  font-weight: 800;
+  padding: 5px;
+  background: #ffd3d9; }
+  .error::before {
+    content: "Error: "; }
+
+.highlight {
+  padding: 5px;
+  background: #e54142; }
+
 a {
   color: #f8a3a5; }
   a:hover {
@@ -81,9 +93,7 @@ body {
     font-size: 1.8em;
     font-weight: 800; }
   #loader #loader-status {
-    font-size: 1.5em;
-    padding: 5px;
-    background: #e54142; }
+    font-size: 1.5em; }
 
 #data-wrapper {
   display: -webkit-box;
@@ -142,9 +152,7 @@ body {
       margin-top: 0px;
       text-align: left;
       font-size: 2em;
-      text-transform: uppercase;
-      padding: 5px;
-      background: #e54142; }
+      text-transform: uppercase; }
     #data-wrapper .right .subdata-2 {
       margin-top: 0px;
       margin-bottom: 0px;

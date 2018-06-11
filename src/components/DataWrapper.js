@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
 import DataItemContainer from './../containers/DataItemContainer';
+import StatusItem from './StatusItem';
+import location from './../utils/location';
 
 class DataWrapper extends Component {
   constructor(props) {
     super(props);
-    // Get user location
+
+    this.props.updateLoaderStatus('Getting your location');
+    location().then((position) => {
+      this.props.updateLocation(position);
+      this.props.updateLoaderStatus('Located');
+    }).catch((e) => {
+      this.props.updateLoaderStatus('Unable to get your location');
+      this.props.updateLoaderError(true);
+    });
+
     // Make API requests
     // Receive API responses
     // Match location to most proximate data
@@ -12,7 +23,7 @@ class DataWrapper extends Component {
   }
 
   render() {
-    if (this.props.loader.isLoaded) {
+    if (this.props.loader.loaded) {
       return (
         <div id="data-wrapper">
           <div className="left">
@@ -21,10 +32,9 @@ class DataWrapper extends Component {
           </div>
           <div className="right">
             <h3 id="nowcast" className="subdata-1">
-            <DataItemContainer id="nowcast" className="subdata-1" />
               Sunny
             </h3>
-            {/* <DataItemContainer id="nowcast" className="subdata-1" /> */}
+            {/* <DataItemContainer id="nowcast" className="subdata-1 highlight" /> */}
             <h3 id="humidity" className="subdata-2">
               Humidity: 65%
             </h3>
@@ -40,9 +50,12 @@ class DataWrapper extends Component {
       return (
         <div id="loader">
           <span id="loader-loading">Loading:</span>
-          <span id="loader-status">
+          <StatusItem
+            id="loader-status"
+            className={ this.props.loader.error ? 'error' : 'highlight' }
+          >
             { this.props.loader.status }
-          </span>
+          </StatusItem>
         </div>
       );
     }
