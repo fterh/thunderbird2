@@ -1,4 +1,6 @@
-export default function() {
+// @flow
+
+export default function(): Promise {
   return new Promise((resolve, reject) => {
     if (!navigator.geolocation) {
       reject('Your browser doesn\'t support geolocation');
@@ -6,4 +8,4 @@ export default function() {
       navigator.geolocation.getCurrentPosition(resolve, reject);
     }
   });
-}
+};

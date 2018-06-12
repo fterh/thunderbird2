@@ -31,25 +31,19 @@ const uvIndex = (state, action) => {
 const loader = (state, action) => {
   switch (action.type) {
     case UPDATE_LOADER_LOADED:
-      console.log('1', state, action);
       return Object.assign({}, state, {
         loaded: action.loaded
       });
-      break;
     
     case UPDATE_LOADER_STATUS:
-      console.log('2', state, action);
       return Object.assign({}, state, {
         status: action.status
       });
-      break;
     
     case UPDATE_LOADER_ERROR:
-      console.log('3', state, action);
       return Object.assign({}, state, {
         error: action.error
       });
-      break;      
   
     default:
       return {
