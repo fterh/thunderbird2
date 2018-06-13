@@ -1,6 +1,6 @@
 // @flow
 
-export default function(): Promise {
+export default function(): Promise<Position> {
   return new Promise((resolve, reject) => {
     if (!navigator.geolocation) {
       reject('Your browser doesn\'t support geolocation');
