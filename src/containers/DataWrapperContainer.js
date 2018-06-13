@@ -10,7 +10,8 @@ import DataWrapper from './../components/DataWrapper';
 
 const mapStateToProps = (state) => {
   return {
-    loader: state.loader
+    loader: state.loader,
+    store: state // for debugging during development
   };
 }
 
