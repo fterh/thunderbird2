@@ -47,6 +47,14 @@ class DataWrapper extends Component {
         </div>
       );
     } else {
+      let logStore = process.env.NODE_ENV === 'development'
+        ? <input
+          type="button"
+          onClick={ () => console.log(this.props.store) }
+          value="console.log(store)"
+        /> 
+        : undefined;
+
       return (
         <div id="loader">
           <span id="loader-loading">Loading:</span>
@@ -56,6 +64,8 @@ class DataWrapper extends Component {
           >
             { this.props.loader.status }
           </StatusItem>
+
+          { logStore }
         </div>
       );
     }

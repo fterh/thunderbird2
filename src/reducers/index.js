@@ -1,4 +1,5 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
+
 import {
   UPDATE_TEMPERATURE,
   UPDATE_NOWCAST,
@@ -11,6 +12,7 @@ import {
   UPDATE_LOADER_ERROR
 } from './../actions/loader';
 import { UPDATE_LOCATION } from './../actions/location';
+import { UPDATE_PAYLOAD } from './../actions/payload';
 
 const temperature = (state, action) => {
   return action.type === UPDATE_TEMPERATURE ? action.temperature : '-';
@@ -58,11 +60,23 @@ const location = (state, action) => {
   return action.type === UPDATE_LOCATION ? action.position : null;
 };
 
+const payload = (state, action) => {
+  if (action.type !== UPDATE_PAYLOAD) {
+    return {};
+  }
+
+  let res = Object.assign({}, state);
+  res[action.name] = action.data;
+  console.log(res);
+  return res;
+};
+
 export default combineReducers({
   temperature,
   nowcast,
   humidity,
   uvIndex,
   loader,
-  location
+  location,
+  payload
 });
