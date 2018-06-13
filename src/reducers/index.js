@@ -1,34 +1,12 @@
 import { combineReducers } from 'redux';
 
 import {
-  UPDATE_TEMPERATURE,
-  UPDATE_NOWCAST,
-  UPDATE_HUMIDITY,
-  UPDATE_UVINDEX
-} from './../actions';
-import {
   UPDATE_LOADER_LOADED,
   UPDATE_LOADER_STATUS,
   UPDATE_LOADER_ERROR
 } from './../actions/loader';
 import { UPDATE_LOCATION } from './../actions/location';
 import { UPDATE_PAYLOAD } from './../actions/payload';
-
-const temperature = (state, action) => {
-  return action.type === UPDATE_TEMPERATURE ? action.temperature : '-';
-};
-
-const nowcast = (state, action) => {
-  return action.type === UPDATE_NOWCAST ? action.nowcast : '-';
-};
-
-const humidity = (state, action) => {
-  return action.type === UPDATE_HUMIDITY ? action.humidity : '-';
-};
-
-const uvIndex = (state, action) => {
-  return action.type === UPDATE_UVINDEX ? action.uvIndex : '-';
-};
 
 const loader = (state, action) => {
   switch (action.type) {
@@ -50,7 +28,7 @@ const loader = (state, action) => {
     default:
       return {
         loaded: false,
-        status: 'Initializing...',
+        status: 'Loading',
         error: false
       };
   }
@@ -72,10 +50,6 @@ const payload = (state, action) => {
 };
 
 export default combineReducers({
-  temperature,
-  nowcast,
-  humidity,
-  uvIndex,
   loader,
   location,
   payload
