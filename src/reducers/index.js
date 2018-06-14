@@ -38,14 +38,13 @@ const location = (state, action) => {
   return action.type === UPDATE_LOCATION ? action.position : null;
 };
 
-const payload = (state, action) => {
+export const payload = (state, action) => {
   if (action.type !== UPDATE_PAYLOAD) {
     return {};
   }
 
   let res = Object.assign({}, state);
   res[action.name] = action.data;
-  console.log(res);
   return res;
 };
 
