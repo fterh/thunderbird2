@@ -1,25 +1,20 @@
-// @flow
-/*
-This module fetches weather data through AJAX requests to API routes,
-and returns promises which resolves/rejects depending on the outcome
-of the requests.
+/* @flow
 
-Currently, it only fetches current air temperature.
+This wrapper function imports and calls the individual functions for fetching 
+specific weather data, wraps their promises using Promise.all, and returns it.
 */
 
-import axios from 'axios';
+import type $payload from './../types/payload';
+import temperature from './weather/temperature';
+import uvIndex from './weather/uvIndex';
+import humidity from './weather/humidity';
+import nowcast from './weather/nowcast';
 
-export const URL = 'https://api.data.gov.sg/v1/environment/air-temperature';
-
-export default function(): Promise<{}> {
-  return new Promise((resolve, reject) => {
-    axios
-      .get(URL)
-      .then((res) => {
-        resolve(res.data);
-      })
-      .catch((e) => {
-        reject(e);
-      });
-  });
+export default function(): Promise<Array<$payload>> {
+  return Promise.all([
+    temperature(),
+    uvIndex(),
+    humidity(),
+    nowcast()
+  ]);
 };

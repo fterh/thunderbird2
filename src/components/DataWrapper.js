@@ -23,11 +23,13 @@ class DataWrapper extends Component {
       }
     });
 
-    weather().then((payloadData) => {
-      let payload = { name: 'temperature', data: payloadData };
-      this.props.updatePayload(payload);
+    weather().then((arrPromises) => {
+      arrPromises.forEach((payload) => {
+        this.props.updatePayload(payload);
+      });
     }).catch((e) => {
-      this.props.updateLoaderStatus(e);
+      console.log(`weather() promise rejected: ${e}`);
+      this.props.updateLoaderStatus('Unable to fetch weather data, please try again');
       this.props.updateLoaderError(true);
     });
 
