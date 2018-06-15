@@ -2,18 +2,25 @@ import React, { Component } from 'react';
 import DataItemContainer from './../containers/DataItemContainer';
 import StatusItem from './StatusItem';
 import location from './../utils/location';
+import weather from './../utils/weather';
 
 class DataWrapper extends Component {
   constructor(props) {
     super(props);
 
-    this.props.updateLoaderStatus('Getting your location');
     location().then((position) => {
       this.props.updateLocation(position);
       this.props.updateLoaderStatus('Located');
     }).catch((e) => {
-      this.props.updateLoaderStatus('Unable to get your location');
-      this.props.updateLoaderError(true);
+      if (typeof e === 'string') {
+        // If client doesn't support geolocation (see src/utils/location.js)
+        this.props.updateLoaderStatus(e);
+        this.props.updateLoaderError(true);
+      } else {
+        // If geolocation fails for some other reason
+        this.props.updateLoaderStatus('Unable to get your location');
+        this.props.updateLoaderError(true);
+      }
     });
 
     // Make API requests
