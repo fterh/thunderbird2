@@ -6,9 +6,11 @@ specific weather data, wraps their promises using Promise.all, and returns it.
 
 import type $payload from './../types/payload';
 import temperature from './weather/temperature';
+import uvIndex from './weather/uvIndex';
 
 export default function(): Promise<Array<$payload>> {
   return Promise.all([
-    temperature()
+    temperature(),
+    uvIndex()
   ]);
 };
