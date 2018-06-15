@@ -23,8 +23,14 @@ class DataWrapper extends Component {
       }
     });
 
-    // Make API requests
-    // Receive API responses
+    weather().then((payloadData) => {
+      let payload = { name: 'temperature', data: payloadData };
+      this.props.updatePayload(payload);
+    }).catch((e) => {
+      this.props.updateLoaderStatus(e);
+      this.props.updateLoaderError(true);
+    });
+
     // Match location to most proximate data
     // Render data
   }
