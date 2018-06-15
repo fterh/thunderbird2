@@ -25,6 +25,14 @@ jest.mock('./../weather/humidity', () => {
   });
 });
 
+jest.mock('./../weather/nowcast', () => {
+  return jest.fn(() => {
+    return new Promise((res, rej) => {
+      res('nowcast');
+    });
+  });
+});
+
 it('should return a Promise', () => {
   expect(typeof(weather().then)).toBe('function');
 });
@@ -33,6 +41,6 @@ it('the Promise should resolve into an array', () => {
   expect.assertions(2);
   return weather().then((arrPromises) => {
     expect(Array.isArray(arrPromises)).toBe(true);
-    expect(arrPromises.length).toBe(3);
+    expect(arrPromises.length).toBe(4);
   });
 })

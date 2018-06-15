@@ -8,11 +8,13 @@ import type $payload from './../types/payload';
 import temperature from './weather/temperature';
 import uvIndex from './weather/uvIndex';
 import humidity from './weather/humidity';
+import nowcast from './weather/nowcast';
 
 export default function(): Promise<Array<$payload>> {
   return Promise.all([
     temperature(),
     uvIndex(),
-    humidity()
+    humidity(),
+    nowcast()
   ]);
 };
