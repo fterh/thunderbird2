@@ -5,6 +5,7 @@ import {
   updateLoaderError
 } from './../actions/loader';
 import { updateLocation } from './../actions/location';
+import { updatePayload } from './../actions/payload';
 
 import DataWrapper from './../components/DataWrapper';
 
@@ -20,7 +21,8 @@ const mapDispatchToProps = (dispatch) => {
     updateLoaderLoaded: (loaded) => { dispatch(updateLoaderLoaded(loaded)) },
     updateLoaderStatus: (status) => { dispatch(updateLoaderStatus(status)) },
     updateLoaderError: (error) => { dispatch(updateLoaderError(error)) },
-    updateLocation: (position) => { dispatch(updateLocation(position)) }
+    updateLocation: (position) => { dispatch(updateLocation(position)) },
+    updatePayload: (payload) => { dispatch(updatePayload(payload)) }
   };
 }
 
