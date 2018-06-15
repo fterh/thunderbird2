@@ -26,21 +26,25 @@ const loader = (state, action) => {
       });
   
     default:
-      return {
-        loaded: false,
-        status: 'Loading',
-        error: false
-      };
+      if (state === undefined) {
+        return {
+          loaded: false,
+          status: 'Loading',
+          error: false
+        };
+      }
+
+      return state;
   }
 };
 
-const location = (state, action) => {
-  return action.type === UPDATE_LOCATION ? action.position : null;
+const location = (state = null, action) => {
+  return action.type === UPDATE_LOCATION ? action.position : state;
 };
 
-export const payload = (state, action) => {
+export const payload = (state = {}, action) => {
   if (action.type !== UPDATE_PAYLOAD) {
-    return {};
+    return state;
   }
 
   let res = Object.assign({}, state);
