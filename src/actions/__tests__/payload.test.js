@@ -1,6 +1,6 @@
 // @flow
 
-import type { $payload } from './../payload';
+import type $payload from './../../types/payload';
 import { UPDATE_PAYLOAD, updatePayload } from './../payload';
 
 it('should generate the `payload` action correctly', () => {
