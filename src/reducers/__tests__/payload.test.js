@@ -1,7 +1,7 @@
 // @flow
 
 import { UPDATE_PAYLOAD } from './../../actions/payload';
-import { payload } from './../index';
+import payload from './../payload';
 
 const payloadData = {
   "metadata": {
