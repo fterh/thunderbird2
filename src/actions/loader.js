@@ -29,4 +29,4 @@ export function updateLoaderError(error: boolean): $loaderErrorAction {
     type: UPDATE_LOADER_ERROR,
     error: error
   }
-}
+};

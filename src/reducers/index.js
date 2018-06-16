@@ -3,12 +3,8 @@
 import { combineReducers } from 'redux';
 
 import loader from './loader';
-import { UPDATE_LOCATION } from './../actions/location';
+import location from './location';
 import { UPDATE_PAYLOAD } from './../actions/payload';
-
-const location = (state = null, action) => {
-  return action.type === UPDATE_LOCATION ? action.position : state;
-};
 
 export const payload = (state = {}, action) => {
   if (action.type !== UPDATE_PAYLOAD) {
