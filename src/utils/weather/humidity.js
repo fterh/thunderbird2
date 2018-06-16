@@ -1,7 +1,7 @@
 // @flow
 
 import axios from 'axios';
-import type $payload from './../../types/payload';
+import type { $payload } from './../../types/payload';
 
 export const URL = 'https://api.data.gov.sg/v1/environment/relative-humidity';
 
