@@ -13,7 +13,9 @@ export type $payloadAction = {
 
 export type $payloadActions = $payloadAction;
 
-export type $payloadState = {};
+export type $payloadState = {
+  [string]: {}
+};
 /*
 payloadState:
   key1: {},
