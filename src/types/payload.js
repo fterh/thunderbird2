@@ -14,7 +14,9 @@ export type $payloadAction = {
 export type $payloadActions = $payloadAction;
 
 export type $payloadState = {
-  [string]: {}
+  [string]: {
+    [string]: any
+  }
 };
 /*
 payloadState:
