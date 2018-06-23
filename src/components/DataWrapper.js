@@ -3,12 +3,13 @@ import DataItemContainer from './../containers/DataItemContainer';
 import StatusItem from './StatusItem';
 import location from './../utils/location';
 import weather from './../utils/weather';
+import proximate from './../utils/proximate';
 
 class DataWrapper extends Component {
   constructor(props) {
     super(props);
 
-    location().then((position) => {
+    let locationPromise = location().then((position) => {
       this.props.updateLocation(position);
       this.props.updateLoaderStatus('Located');
     }).catch((e) => {
@@ -23,7 +24,7 @@ class DataWrapper extends Component {
       }
     });
 
-    weather().then((arrPromises) => {
+    let weatherPromise = weather().then((arrPromises) => {
       arrPromises.forEach((payload) => {
         this.props.updatePayload(payload);
       });
@@ -32,6 +33,19 @@ class DataWrapper extends Component {
       this.props.updateLoaderStatus('Unable to fetch weather data, please try again');
       this.props.updateLoaderError(true);
     });
+
+    // Promise.all() so proximate() is only called after location() and weather()
+    // are resolved
+    Promise.all([locationPromise, weatherPromise])
+      .then(() => {
+        this.props.updateLoaderStatus('Finalizing');
+        proximate(
+          this.props.location,
+          this.props.payload,
+          this.props.updateRender
+        );
+      }).catch();
+
 
     // Match location to most proximate data
     // Render data
