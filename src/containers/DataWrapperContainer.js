@@ -6,12 +6,15 @@ import {
 } from './../actions/loader';
 import { updateLocation } from './../actions/location';
 import { updatePayload } from './../actions/payload';
+import { updateRender } from './../actions/render';
 
 import DataWrapper from './../components/DataWrapper';
 
 const mapStateToProps = (state) => {
   return {
     loader: state.loader,
+    location: state.location,
+    payload: state.payload,
     store: state // for debugging during development
   };
 }
@@ -22,7 +25,8 @@ const mapDispatchToProps = (dispatch) => {
     updateLoaderStatus: (status) => { dispatch(updateLoaderStatus(status)) },
     updateLoaderError: (error) => { dispatch(updateLoaderError(error)) },
     updateLocation: (position) => { dispatch(updateLocation(position)) },
-    updatePayload: (payload) => { dispatch(updatePayload(payload)) }
+    updatePayload: (payload) => { dispatch(updatePayload(payload)) },
+    updateRender: (data) => { dispatch(updateRender(data)) }
   };
 }
 
