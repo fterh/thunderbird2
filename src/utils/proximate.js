@@ -35,6 +35,12 @@ export default function(
 
       // Convert payloadItem.items[0].readings into an object for O(1) lookup
       let payloadItemReadings = {};
+
+      // Check for data integrity
+      if (!payloadItem.items[0] || !payloadItem.items[0].readings) {
+        return undefined;
+      }
+
       payloadItem.items[0].readings.forEach((reading) => {
         payloadItemReadings[reading.station_id] = reading.value;
       });
@@ -61,6 +67,12 @@ export default function(
 
       // Convert payloadItem.items[0].forecasts into an object for O(1) lookup
       let payloadItemReadings = {};
+      
+      // Check for data integrity - error handling
+      if (!payloadItem.items[0] || !payloadItem.items[0].forecasts) {
+        return undefined;
+      }
+
       payloadItem.items[0].forecasts.forEach((forecast) => {
         payloadItemReadings[forecast.area] = forecast.forecast;
       });
