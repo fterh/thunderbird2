@@ -96,6 +96,7 @@ body {
     font-size: 1.5em; }
 
 #data-wrapper {
+  color: #f8a3a5;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -128,8 +129,12 @@ body {
       font-weight: 400;
       letter-spacing: -10px;
       text-align: center; }
+    #data-wrapper .left #nowcast {
+      margin-top: 0px;
+      text-align: center;
+      font-size: 1.4em;
+      text-transform: uppercase; }
   #data-wrapper .right {
-    color: #f8a3a5;
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -148,11 +153,6 @@ body {
     -webkit-align-items: flex-end;
     -ms-flex-align: end;
     align-items: flex-end; }
-    #data-wrapper .right #nowcast {
-      margin-top: 0px;
-      text-align: left;
-      font-size: 2em;
-      text-transform: uppercase; }
     #data-wrapper .right .subdata-2 {
       margin-top: 0px;
       margin-bottom: 0px;

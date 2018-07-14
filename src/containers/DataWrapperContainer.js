@@ -15,7 +15,8 @@ const mapStateToProps = (state) => {
     loader: state.loader,
     location: state.location,
     payload: state.payload,
-    store: state // for debugging during development
+    render: state.render,
+    state: state // for debugging during development
   };
 }
 

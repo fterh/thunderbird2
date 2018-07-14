@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import DataItemContainer from './../containers/DataItemContainer';
+import DataItem from './../components/DataItem';
 import StatusItem from './StatusItem';
 import location from './../utils/location';
 import weather from './../utils/weather';
@@ -44,6 +44,7 @@ class DataWrapper extends Component {
           this.props.payload,
           this.props.updateRender
         );
+        this.props.updateLoaderLoaded(true);
       }).catch();
 
 
@@ -52,38 +53,40 @@ class DataWrapper extends Component {
   }
 
   render() {
-    if (this.props.loader.loaded) {
-      return (
-        <div id="data-wrapper">
-          <div className="left">
-            <h2 id="temperature">28</h2>
-            {/* <DataItemContainer id="temperature" /> */}
-          </div>
-          <div className="right">
-            <h3 id="nowcast" className="subdata-1">
-              Sunny
-            </h3>
-            {/* <DataItemContainer id="nowcast" className="subdata-1 highlight" /> */}
-            <h3 id="humidity" className="subdata-2">
-              Humidity: 65%
-            </h3>
-            {/* <DataItemContainer id="humidity" className="subdata-2" /> */}
-            <h3 id="uv-index" className="subdata-2">
-              UV Index: 4
-            </h3>
-            {/* <DataItemContainer id="uv-index" className="subdata-2" /> */}
-          </div>
-        </div>
-      );
-    } else {
-      let logStore = process.env.NODE_ENV === 'development'
+    let logState = process.env.NODE_ENV === 'development'
         ? <input
           type="button"
-          onClick={ () => console.log(this.props.store) }
-          value="console.log(store)"
+          onClick={ () => console.log(this.props.state) }
+          value="console.log(state)"
         /> 
-        : undefined;
+        : null;
+    
+    if (this.props.loader.loaded) {
+      return (
+        <div>
+        <div id="data-wrapper">
+          <div className="left">
+            <DataItem id="temperature">
+              { this.props.render.temperature }
+            </DataItem>
+            <DataItem id="nowcast" className="subdata-1 highlight">
+              { this.props.render.nowcast }
+            </DataItem>
+          </div>
+          <div className="right">
+            <DataItem id="humidity" className="subdata-2">
+              Humidity: { this.props.render.humidity }%
+            </DataItem>
+            <DataItem id="uv-index" className="subdata-2">
+              UV Index: { this.props.render.uvIndex }
+            </DataItem>
+          </div>
+        </div>
+        { logState }
+        </div>
 
+      );
+    } else {
       return (
         <div id="loader">
           <span id="loader-loading">Loading:</span>
@@ -94,7 +97,7 @@ class DataWrapper extends Component {
             { this.props.loader.status }
           </StatusItem>
 
-          { logStore }
+          { logState }
         </div>
       );
     }

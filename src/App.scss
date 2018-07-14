@@ -136,6 +136,7 @@ body {
 }
 
 #data-wrapper {
+  color: $primaryColorLighter;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -171,10 +172,16 @@ body {
       letter-spacing: -10px;
       text-align: center;
     }
+
+      #nowcast {
+        margin-top: 0px;
+        text-align: center;
+        font-size: 1.4em;
+        text-transform: uppercase;
+      }
   }
   
   .right {
-    color: $primaryColorLighter;
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -194,13 +201,6 @@ body {
     -ms-flex-align: end;
     align-items: flex-end;
 
-    #nowcast {
-      margin-top: 0px;
-      text-align: left;
-      font-size: 2em;
-      text-transform: uppercase;
-    }
-    
     .subdata-2 {
       margin-top: 0px;
       margin-bottom: 0px;
