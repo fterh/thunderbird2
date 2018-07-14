@@ -1,3 +1,5 @@
+// @flow
+
 import { connect } from 'react-redux';
 import {
   updateLoaderLoaded,
@@ -10,7 +12,9 @@ import { updateRender } from './../actions/render';
 
 import DataWrapper from './../components/DataWrapper';
 
-const mapStateToProps = (state) => {
+import type { State, Dispatch } from './../types/index';
+
+const mapStateToProps = (state: State) => {
   return {
     loader: state.loader,
     location: state.location,
@@ -20,7 +24,7 @@ const mapStateToProps = (state) => {
   };
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     updateLoaderLoaded: (loaded) => { dispatch(updateLoaderLoaded(loaded)) },
     updateLoaderStatus: (status) => { dispatch(updateLoaderStatus(status)) },

@@ -1,6 +1,14 @@
+// @flow
+
 import React from 'react';
 
-const StatusItem = (props) => {
+type Props = {
+  id?: string,
+  className?: string,
+  children: any
+};
+
+const StatusItem = (props: Props) => {
   return (
     <span id={ props.id } className={ props.className }>
       { props.children }

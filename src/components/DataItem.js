@@ -1,6 +1,14 @@
+// @flow
+
 import React from 'react';
 
-const DataItem = (props) => {
+type Props = {
+  id?: string,
+  className?: string,
+  children: any
+};
+
+const DataItem = (props: Props) => {
   return (
     <h3 id={ props.id } className={ props.className }>
       { props.children }

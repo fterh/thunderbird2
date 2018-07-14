@@ -1,3 +1,5 @@
+// @flow
+
 import React, { Component } from 'react';
 
 import Main from './components/Main';
@@ -7,7 +9,9 @@ import './wf.css';
 // import 'normalize.css';
 import './App.css';
 
-class App extends Component {
+type Props = {};
+
+class App extends Component<Props> {
   render() {
     return (
       <div id="root" className="div-block">

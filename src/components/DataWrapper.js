@@ -1,3 +1,5 @@
+// @flow
+
 import React, { Component } from 'react';
 import DataItem from './../components/DataItem';
 import StatusItem from './StatusItem';
@@ -5,8 +7,28 @@ import location from './../utils/location';
 import weather from './../utils/weather';
 import proximate from './../utils/proximate';
 
-class DataWrapper extends Component {
-  constructor(props) {
+import type { State } from './../types/index';
+import type { $loaderState } from './../types/loader';
+import type { $locationState } from './../types/location';
+import type { $payload, $payloadState } from './../types/payload';
+import type { $renderData, $renderState } from './../types/render';
+
+type Props = {
+  loader: $loaderState,
+  location: $locationState,
+  payload: $payloadState,
+  render: $renderState,
+  state: State,
+  updateLoaderLoaded: (boolean) => void,
+  updateLoaderStatus: (?string) => void,
+  updateLoaderError: (boolean) => void,
+  updateLocation: (Position) => void,
+  updatePayload: ($payload) => void,
+  updateRender: ($renderData) => void
+};
+
+class DataWrapper extends Component<Props> {
+  constructor(props: Props) {
     super(props);
 
     let locationPromise = location().then((position) => {
@@ -45,6 +67,9 @@ class DataWrapper extends Component {
       .then(() => {
         console.log('locationPromise and weatherPromise fulfilled');
         this.props.updateLoaderStatus('Finalizing');
+        if (!this.props.location) {
+          throw new Error('Location in application state is falsey');
+        }
         proximate(
           this.props.location,
           this.props.payload,
@@ -57,7 +82,6 @@ class DataWrapper extends Component {
           console.error('Either locationPromise or weatherPromise failed');
           console.error(e);
       });
-
 
     // Match location to most proximate data
     // Render data
