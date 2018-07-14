@@ -1,3 +1,5 @@
+// @flow
+
 import React, { Component } from 'react';
 import DataItem from './../components/DataItem';
 import StatusItem from './StatusItem';
@@ -5,48 +7,81 @@ import location from './../utils/location';
 import weather from './../utils/weather';
 import proximate from './../utils/proximate';
 
-class DataWrapper extends Component {
-  constructor(props) {
+import type { State } from './../types/index';
+import type { $loaderState } from './../types/loader';
+import type { $locationState } from './../types/location';
+import type { $payload, $payloadState } from './../types/payload';
+import type { $renderData, $renderState } from './../types/render';
+
+type Props = {
+  loader: $loaderState,
+  location: $locationState,
+  payload: $payloadState,
+  render: $renderState,
+  state: State,
+  updateLoaderLoaded: (boolean) => void,
+  updateLoaderStatus: (?string) => void,
+  updateLoaderError: (boolean) => void,
+  updateLocation: (Position) => void,
+  updatePayload: ($payload) => void,
+  updateRender: ($renderData) => void
+};
+
+class DataWrapper extends Component<Props> {
+  constructor(props: Props) {
     super(props);
 
     let locationPromise = location().then((position) => {
+      console.log('location() completed');
       this.props.updateLocation(position);
       this.props.updateLoaderStatus('Located');
     }).catch((e) => {
       if (typeof e === 'string') {
         // If client doesn't support geolocation (see src/utils/location.js)
+        console.error('Client does not support geolocation');
         this.props.updateLoaderStatus(e);
         this.props.updateLoaderError(true);
       } else {
         // If geolocation fails for some other reason
+        console.error('Geolocation failed');
         this.props.updateLoaderStatus('Unable to get your location');
         this.props.updateLoaderError(true);
       }
     });
 
     let weatherPromise = weather().then((arrPromises) => {
+      console.log('weather() completed');
       arrPromises.forEach((payload) => {
         this.props.updatePayload(payload);
       });
+      console.log('weather() payload written to application state');;
     }).catch((e) => {
-      console.log(`weather() promise rejected: ${e}`);
+      console.error(`weather() promise rejected: ${e}`);
       this.props.updateLoaderStatus('Unable to fetch weather data, please try again');
       this.props.updateLoaderError(true);
     });
 
-    // Promise.all() so proximate() is only called after location() and weather()
-    // are resolved
+    /* Promise.all() so proximate() is only called after location() and weather()
+    are resolved */
     Promise.all([locationPromise, weatherPromise])
       .then(() => {
+        console.log('locationPromise and weatherPromise fulfilled');
         this.props.updateLoaderStatus('Finalizing');
+        if (!this.props.location) {
+          throw new Error('Location in application state is falsey');
+        }
         proximate(
           this.props.location,
           this.props.payload,
           this.props.updateRender
         );
+        console.log('proximate() completed');
         this.props.updateLoaderLoaded(true);
-      }).catch();
-
+      }).catch((e) => {
+          // Better error handling
+          console.error('Either locationPromise or weatherPromise failed');
+          console.error(e);
+      });
 
     // Match location to most proximate data
     // Render data
