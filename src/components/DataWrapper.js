@@ -115,6 +115,9 @@ class DataWrapper extends Component<Props> {
             <DataItem id="uv-index" className="subdata-2">
               UV Index: { this.props.render.uvIndex }
             </DataItem>
+            <DataItem id="current-location" className="subdata-2">
+              { this.props.render.currentLocation }
+            </DataItem>
           </div>
         </div>
         { logState }
