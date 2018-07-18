@@ -11,7 +11,10 @@ type $stationCoordinates = {
 };
 
 type $distances = {
-  [number]: string | number // i.e. <distance>: <value>
+  [number]: {
+    value: string | number,
+    stationName?: string
+  }
 };
 
 export default function(
@@ -52,14 +55,14 @@ export default function(
         let distance = geolib.getDistance(userLocation, stationCoordinates);
         let value = payloadItemReadings[stationID];
 
-        distances[distance] = value;
+        distances[distance] = { value: value };
       });
 
       let distancesKeys = Object.keys(distances);
       distancesKeys = distancesKeys.map((item) => Number(item));
       let closestDistance = Math.min(...distancesKeys);
 
-      return distances[closestDistance]
+      return distances[closestDistance].value;
     } 
     
     if (payloadName === 'nowcast') {
@@ -84,21 +87,29 @@ export default function(
         let distance = geolib.getDistance(userLocation, stationCoordinates);
         let value = payloadItemReadings[stationName];
 
-        distances[distance] = value;
+        distances[distance] = {
+          value: value,
+          stationName: stationName
+        };
       });
 
       let distancesKeys = Object.keys(distances);
       distancesKeys = distancesKeys.map((item) => Number(item));
       let closestDistance = Math.min(...distancesKeys);
 
-      return distances[closestDistance];
+      // Most proximate area name
+      if (distances[closestDistance].stationName) {
+        updateRender({
+          name: 'currentLocation',
+          value: distances[closestDistance].stationName
+        });
+      }
+      return distances[closestDistance].value;
     }
 
     if (payloadName === 'uvIndex') {
       return payloadItem.items[0].index[0].value;
     }
-
-
   }
 
   // Temperature
