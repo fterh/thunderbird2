@@ -34,7 +34,6 @@ class DataWrapper extends Component<Props> {
     let locationPromise = location().then((position) => {
       console.log('location() completed');
       this.props.updateLocation(position);
-      this.props.updateLoaderStatus('Located');
     }).catch((e) => {
       if (typeof e === 'string') {
         // If client doesn't support geolocation (see src/utils/location.js)
@@ -59,6 +58,7 @@ class DataWrapper extends Component<Props> {
       console.error(`weather() promise rejected: ${e}`);
       this.props.updateLoaderStatus('Unable to fetch weather data, please try again');
       this.props.updateLoaderError(true);
+      throw e;
     });
 
     /* Promise.all() so proximate() is only called after location() and weather()
@@ -66,7 +66,6 @@ class DataWrapper extends Component<Props> {
     Promise.all([locationPromise, weatherPromise])
       .then(() => {
         console.log('locationPromise and weatherPromise fulfilled');
-        this.props.updateLoaderStatus('Finalizing');
         if (!this.props.location) {
           throw new Error('Location in application state is falsey');
         }
@@ -90,8 +89,12 @@ class DataWrapper extends Component<Props> {
   render() {
     let logState = process.env.NODE_ENV === 'development'
         ? <input
-          type="button"
           onClick={ () => console.log(this.props.state) }
+          style={{
+            display: 'block',
+            margin: 'auto'
+          }}
+          type="button"
           value="console.log(state)"
         /> 
         : null;
@@ -99,28 +102,27 @@ class DataWrapper extends Component<Props> {
     if (this.props.loader.loaded) {
       return (
         <div>
-        <div id="data-wrapper">
-          <div className="left">
+          <div id="data-wrapper">
+            <DataItem id="current-location" className="subdata-2 bordered">
+              <i className="fas fa-map-marker-alt"></i>&nbsp;
+              { this.props.render.currentLocation }
+            </DataItem>
             <DataItem id="temperature">
               { this.props.render.temperature }
             </DataItem>
             <DataItem id="nowcast" className="subdata-1 highlight">
               { this.props.render.nowcast }
             </DataItem>
-          </div>
-          <div className="right">
             <DataItem id="humidity" className="subdata-2">
-              Humidity: { this.props.render.humidity }%
+              <span className="underline">Humidity:</span>&nbsp;
+              <span className="highlight">{ this.props.render.humidity }%</span>
             </DataItem>
             <DataItem id="uv-index" className="subdata-2">
-              UV Index: { this.props.render.uvIndex }
-            </DataItem>
-            <DataItem id="current-location" className="subdata-2">
-              { this.props.render.currentLocation }
+              <span className="underline">UV Index:</span>&nbsp;
+              <span className="highlight">{ this.props.render.uvIndex }</span>
             </DataItem>
           </div>
-        </div>
-        { logState }
+          { logState }
         </div>
 
       );

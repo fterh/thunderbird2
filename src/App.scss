@@ -15,8 +15,8 @@ $primaryColorDarker: #e54142;
 $error: #B00020;
 
 // Positioning
-$dataWrapperMarginTop: 40px;
-$highlightPadding: 5px;
+$loaderMarginTop: 40px;
+$highlightPadding: 3px;
 
 /* Rules */
 // Generics
@@ -34,6 +34,11 @@ $highlightPadding: 5px;
 .highlight {
   padding: $highlightPadding;
   background: $primaryColorDarker;
+}
+
+.bordered {
+  padding: 4px;
+  border: 4px solid $primaryColorLighter;
 }
 
 a {
@@ -118,7 +123,7 @@ body {
 #loader {
   color: $primaryColorLighter;
   text-align: center;
-  margin-top: $dataWrapperMarginTop;
+  margin-top: $loaderMarginTop;
 
   span {
     display: block;
@@ -137,78 +142,47 @@ body {
 
 #data-wrapper {
   color: $primaryColorLighter;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+  text-align: center;
   width: 100%;
-  margin-top: $dataWrapperMarginTop;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
 
-  .left {
-    margin-right: 10px;
-
-    #temperature {
-      display: inline-block;
-      margin-top: 0px;
-      margin-bottom: 0px;
-      color: $primaryColorLighter;
-      font-family: 'Roboto Condensed';
-      font-size: 12em;
-      line-height: 0.8em;
-      font-weight: 400;
-      letter-spacing: -10px;
-      text-align: center;
-    }
-
-      #nowcast {
-        margin-top: 0px;
-        text-align: center;
-        font-size: 1.4em;
-        text-transform: uppercase;
-      }
+  #current-location {
+    color: $primaryColorLighter;
+    font-size: 1.4em;
+    text-transform: uppercase;
+    margin-bottom: $loaderMarginTop;
   }
-  
-  .right {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    margin-left: 10px;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: end;
-    -webkit-align-items: flex-end;
-    -ms-flex-align: end;
-    align-items: flex-end;
 
-    .subdata-2 {
-      margin-top: 0px;
-      margin-bottom: 0px;
-      font-size: 1.3em;
-      font-weight: 400;
-      text-align: center;
-      text-transform: lowercase;
-    }
+  #temperature {
+    display: inline-block;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: $primaryColorLighter;
+    font-family: 'Roboto Condensed';
+    font-size: 12em;
+    line-height: 0.8em;
+    font-weight: 400;
+    letter-spacing: -10px;
+    text-align: center;
+  }
+
+  #nowcast {
+    margin-top: 0px;
+    text-align: center;
+    font-size: 1.2em;
+    text-transform: uppercase;
+  }
+
+  .subdata-2 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 1.2em;
+    font-weight: 400;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .underline {
+    border-bottom: 4px solid $primaryColorDarker;
   }
 }
 

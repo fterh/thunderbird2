@@ -4,14 +4,18 @@
 .error {
   color: #B00020;
   font-weight: 800;
-  padding: 5px;
+  padding: 3px;
   background: #ffd3d9; }
   .error::before {
     content: "Error: "; }
 
 .highlight {
-  padding: 5px;
+  padding: 3px;
   background: #e54142; }
+
+.bordered {
+  padding: 4px;
+  border: 4px solid #f8a3a5; }
 
 a {
   color: #f8a3a5; }
@@ -97,69 +101,38 @@ body {
 
 #data-wrapper {
   color: #f8a3a5;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  margin-top: 40px;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center; }
-  #data-wrapper .left {
-    margin-right: 10px; }
-    #data-wrapper .left #temperature {
-      display: inline-block;
-      margin-top: 0px;
-      margin-bottom: 0px;
-      color: #f8a3a5;
-      font-family: 'Roboto Condensed';
-      font-size: 12em;
-      line-height: 0.8em;
-      font-weight: 400;
-      letter-spacing: -10px;
-      text-align: center; }
-    #data-wrapper .left #nowcast {
-      margin-top: 0px;
-      text-align: center;
-      font-size: 1.4em;
-      text-transform: uppercase; }
-  #data-wrapper .right {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    margin-left: 10px;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: end;
-    -webkit-align-items: flex-end;
-    -ms-flex-align: end;
-    align-items: flex-end; }
-    #data-wrapper .right .subdata-2 {
-      margin-top: 0px;
-      margin-bottom: 0px;
-      font-size: 1.3em;
-      font-weight: 400;
-      text-align: center;
-      text-transform: lowercase; }
+  text-align: center;
+  width: 100%; }
+  #data-wrapper #current-location {
+    color: #f8a3a5;
+    font-size: 1.4em;
+    text-transform: uppercase;
+    margin-bottom: 40px; }
+  #data-wrapper #temperature {
+    display: inline-block;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: #f8a3a5;
+    font-family: 'Roboto Condensed';
+    font-size: 12em;
+    line-height: 0.8em;
+    font-weight: 400;
+    letter-spacing: -10px;
+    text-align: center; }
+  #data-wrapper #nowcast {
+    margin-top: 0px;
+    text-align: center;
+    font-size: 1.2em;
+    text-transform: uppercase; }
+  #data-wrapper .subdata-2 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 1.2em;
+    font-weight: 400;
+    text-align: center;
+    text-transform: uppercase; }
+  #data-wrapper .underline {
+    border-bottom: 4px solid #e54142; }
 
 #footer .container {
   display: -webkit-box;
