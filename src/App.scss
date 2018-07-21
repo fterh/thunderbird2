@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
 
 /* Sass variables */
-// Fonts
-$font-stack: Roboto, sans-serif; 
+// Typography
+$font-stack: Roboto, sans-serif;
+$monospace: 'Roboto Mono', monospace;
 
 // Colors
 $lightGray: #ddd;
@@ -17,6 +19,7 @@ $error: #B00020;
 // Positioning
 $loaderMarginTop: 40px;
 $highlightPadding: 3px;
+$separation: 20px auto;
 
 /* Rules */
 // Generics
@@ -70,7 +73,7 @@ body {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  height: 100%;
+  min-height: 100%;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
@@ -144,13 +147,7 @@ body {
   color: $primaryColorLighter;
   text-align: center;
   width: 100%;
-
-  #current-location {
-    color: $primaryColorLighter;
-    font-size: 1.4em;
-    text-transform: uppercase;
-    margin-bottom: $loaderMarginTop;
-  }
+  margin: $separation;
 
   #temperature {
     display: inline-block;
@@ -166,19 +163,20 @@ body {
   }
 
   #nowcast {
-    margin-top: 0px;
-    text-align: center;
     font-size: 1.2em;
+    font-family: $monospace;
+    text-align: center;
     text-transform: uppercase;
+    margin: $separation;
   }
 
   .subdata-2 {
-    margin-top: 0px;
-    margin-bottom: 0px;
+    font-family: $monospace;
     font-size: 1.2em;
     font-weight: 400;
     text-align: center;
     text-transform: uppercase;
+    margin: $separation;
   }
 
   .underline {

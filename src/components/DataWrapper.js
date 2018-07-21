@@ -31,35 +31,41 @@ class DataWrapper extends Component<Props> {
   constructor(props: Props) {
     super(props);
 
-    let locationPromise = location().then((position) => {
-      console.log('location() completed');
-      this.props.updateLocation(position);
-    }).catch((e) => {
-      if (typeof e === 'string') {
-        // If client doesn't support geolocation (see src/utils/location.js)
-        console.error('Client does not support geolocation');
-        this.props.updateLoaderStatus(e);
-        this.props.updateLoaderError(true);
-      } else {
-        // If geolocation fails for some other reason
-        console.error('Geolocation failed');
-        this.props.updateLoaderStatus('Unable to get your location');
-        this.props.updateLoaderError(true);
-      }
-    });
-
-    let weatherPromise = weather().then((arrPromises) => {
-      console.log('weather() completed');
-      arrPromises.forEach((payload) => {
-        this.props.updatePayload(payload);
+    let locationPromise = location()
+      .then((position) => {
+        console.log('location() completed');
+        this.props.updateLocation(position);
+      })
+      .catch((e) => {
+        if (typeof e === 'string') {
+          // If client doesn't support geolocation (see src/utils/location.js)
+          console.error('Client does not support geolocation');
+          this.props.updateLoaderStatus(e);
+          this.props.updateLoaderError(true);
+        } else {
+          // If geolocation fails for some other reason
+          console.error('Geolocation failed');
+          this.props.updateLoaderStatus('Unable to get your location');
+          this.props.updateLoaderError(true);
+        }
       });
-      console.log('weather() payload written to application state');;
-    }).catch((e) => {
-      console.error(`weather() promise rejected: ${e}`);
-      this.props.updateLoaderStatus('Unable to fetch weather data, please try again');
-      this.props.updateLoaderError(true);
-      throw e;
-    });
+
+    let weatherPromise = weather()
+      .then((arrPromises) => {
+        console.log('weather() completed');
+        arrPromises.forEach((payload) => {
+          this.props.updatePayload(payload);
+        });
+        console.log('weather() payload written to application state');
+      })
+      .catch((e) => {
+        console.error(`weather() promise rejected: ${e}`);
+        this.props.updateLoaderStatus(
+          'Unable to fetch weather data, please try again'
+        );
+        this.props.updateLoaderError(true);
+        throw e;
+      });
 
     /* Promise.all() so proximate() is only called after location() and weather()
     are resolved */
@@ -76,10 +82,11 @@ class DataWrapper extends Component<Props> {
         );
         console.log('proximate() completed');
         this.props.updateLoaderLoaded(true);
-      }).catch((e) => {
-          // Better error handling
-          console.error('Either locationPromise or weatherPromise failed');
-          console.error(e);
+      })
+      .catch((e) => {
+        // Better error handling
+        console.error('Either locationPromise or weatherPromise failed');
+        console.error(e);
       });
 
     // Match location to most proximate data
@@ -87,44 +94,42 @@ class DataWrapper extends Component<Props> {
   }
 
   render() {
-    let logState = process.env.NODE_ENV === 'development'
-        ? <input
-          onClick={ () => console.log(this.props.state) }
+    let logState =
+      process.env.NODE_ENV === 'development' ? (
+        <input
+          onClick={() => console.log(this.props.state)}
           style={{
             display: 'block',
             margin: 'auto'
           }}
           type="button"
           value="console.log(state)"
-        /> 
-        : null;
-    
+        />
+      ) : null;
+
     if (this.props.loader.loaded) {
       return (
         <div>
           <div id="data-wrapper">
-            <DataItem id="current-location" className="subdata-2 bordered">
-              <i className="fas fa-map-marker-alt"></i>&nbsp;
-              { this.props.render.currentLocation }
-            </DataItem>
             <DataItem id="temperature">
-              { this.props.render.temperature }
+              {this.props.render.temperature}
             </DataItem>
-            <DataItem id="nowcast" className="subdata-1 highlight">
-              { this.props.render.nowcast }
+            <DataItem id="nowcast" className="highlight">
+              <i className="fas fa-map-marker-alt" />&nbsp;
+              {this.props.render.currentLocation}:&nbsp;
+              {this.props.render.nowcast}
             </DataItem>
             <DataItem id="humidity" className="subdata-2">
-              <span className="underline">Humidity:</span>&nbsp;
-              <span className="highlight">{ this.props.render.humidity }%</span>
+              <span>Humidity:</span>&nbsp;
+              <span className="highlight">{this.props.render.humidity}%</span>
             </DataItem>
             <DataItem id="uv-index" className="subdata-2">
-              <span className="underline">UV Index:</span>&nbsp;
-              <span className="highlight">{ this.props.render.uvIndex }</span>
+              <span>UV Index:</span>&nbsp;
+              <span className="highlight">{this.props.render.uvIndex}</span>
             </DataItem>
           </div>
-          { logState }
+          {logState}
         </div>
-
       );
     } else {
       return (
@@ -132,12 +137,12 @@ class DataWrapper extends Component<Props> {
           <span id="loader-loading">Loading:</span>
           <StatusItem
             id="loader-status"
-            className={ this.props.loader.error ? 'error' : 'highlight' }
+            className={this.props.loader.error ? 'error' : 'highlight'}
           >
-            { this.props.loader.status }
+            {this.props.loader.status}
           </StatusItem>
 
-          { logState }
+          {logState}
         </div>
       );
     }
